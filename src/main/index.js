@@ -20,17 +20,17 @@ class Main extends Component {
     }
   }
 
-  handleInput(e){
+  handleInput(event){
     this.setState({
       currentItem:{
-        text: e.target.value,
+        text: event.target.value,
         key: Date.now()
       }
     })
   }
 
-  addItem(e) {
-    e.preventDefault()
+  addItem(event) {
+    event.preventDefault()
     const newItem = this.state.currentItem
     if (newItem.text !== '') {
       const newItems = [...this.state.items, newItem]
@@ -69,15 +69,15 @@ class Main extends Component {
     return (
       <div className="App">
         <header>
-          <form onSubmit={(e) => this.addItem(e)}>
+          <form onSubmit={(event) => this.addItem(event)}>
             <input type="text" placeholder="Digite" value={this.state.currentItem.text}
-            onChange={(e) => this.handleInput(e)} />
+            onChange={(event) => this.handleInput(event)} />
             <button type="submit">Add</button>
           </form>
         </header>        
         <List items={this.state.items} 
-        deleteItem={(e) => this.deleteItem(e)}
-        setUpdate={(e, y) => this.setUpdate(e, y)}/>
+        deleteItem={(key) => this.deleteItem(key)}
+        setUpdate={(value, key) => this.setUpdate(value, key)}/>
       </div>
     )
   }
