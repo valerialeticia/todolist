@@ -18,10 +18,6 @@ class Main extends Component {
         key: ''
       }
     }
-    this.handleInput = this.handleInput.bind(this)
-    this.addItem = this.addItem.bind(this)
-    this.deleteItem = this.deleteItem.bind(this)
-    this.setUpdate = this.setUpdate.bind(this)
   }
 
   handleInput(e){
@@ -62,6 +58,7 @@ class Main extends Component {
       if (item.key === key) {
         item.text = text
       }
+      return ''
     })
     this.setState({
       items: items
@@ -72,17 +69,17 @@ class Main extends Component {
     return (
       <div className="App">
         <header>
-          <form onSubmit={this.addItem}>
+          <form onSubmit={(e) => this.addItem(e)}>
             <input type="text" placeholder="Digite" value={this.state.currentItem.text}
-            onChange={this.handleInput} />
+            onChange={(e) => this.handleInput(e)} />
             <button type="submit">Add</button>
           </form>
         </header>        
         <List items={this.state.items} 
-        deleteItem={this.deleteItem}
-        setUpdate={this.setUpdate}/>
+        deleteItem={(e) => this.deleteItem(e)}
+        setUpdate={(e, y) => this.setUpdate(e, y)}/>
       </div>
-    );
+    )
   }
 }
 
